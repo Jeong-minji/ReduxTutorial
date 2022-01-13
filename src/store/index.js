@@ -1,9 +1,18 @@
-import { createStore } from "@reduxjs/toolkit";
-import rootReducer from "../reducers/index";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-const store = createStore(rootReducer);
+const store = createSlice({
+  name: "storeReducer",
+  initialState: { text: "", count: 0 },
+  reducers: {
+    add: (state, action) => {
+      state.text = action.payload;
+    },
+    plus: (state, action) => {
+      state.count++;
+    },
+  },
+});
 
-export default store;
+export const { add, plus } = store.actions; // store에서의 action 중, add와 plus를 내보냄
 
-// createStore: store 생성 함수
-// 첫번째 인수로 rootReducer
+export default configureStore({ reducer: store.reducer }); // Store를 생성함 (createStore 대체)
