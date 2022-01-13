@@ -1,11 +1,16 @@
-import React from "react";
+import store from "./store/index";
+import { addArticle } from "./actions/index";
 
-function App() {
+window.store = store;
+window.addArticle = addArticle;
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header"></header>
+    <div>
+      <h2>Articlees</h2>
+      <List />
     </div>
   );
-}
+};
 
 export default App;
