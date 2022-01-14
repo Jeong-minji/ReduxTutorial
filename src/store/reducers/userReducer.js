@@ -1,9 +1,7 @@
-const initialData = { data: {} };
-
-const userReducer = (state = initialData, action) => {
+const userReducer = (state = {}, action) => {
   switch (action.type) {
-    case "FETCH_USER_DATA":
-      return { ...state, data: action.payload };
+    case "FETCH_USER":
+      return action.payload;
     default:
       return state;
   }

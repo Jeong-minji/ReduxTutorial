@@ -1,21 +1,28 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { fetchUserData } from "./store/actions";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUserData } from "./store/actions/user";
+import { connect } from "react-redux";
 
 const User = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((store) => store.user);
+
   useEffect(() => {
     dispatch(fetchUserData("FETCH_USER_DATA"));
   }, []);
 
-  const dispatch = useDispatch();
-  const user = useSelector((store) => store.userReducer);
-
   return (
     <>
-      <div>{user.data}</div>
+      {console.log(user)}
+      {/* <div>{user.data.data}</div> */}
     </>
   );
 };
 
-export default User;
+const mapStateToProps = (state) => {
+  return {
+    user: state,
+  };
+};
+
+export default connect(mapStateToProps, { fetchUserData })(User);

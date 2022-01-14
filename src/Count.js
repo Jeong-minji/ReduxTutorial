@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { increaseNumber, decreaseNumber } from "./store/actions";
+import { increaseNumber, decreaseNumber } from "./store/actions/count";
 
 import "./style/Count.css";
 
 const Count = () => {
   const dispatch = useDispatch();
-  const count = useSelector((store) => store.countReducer);
+  const count = useSelector((store) => store.count);
 
   const handleButton = (e) => {
     if (e.target.id === "increase") {
