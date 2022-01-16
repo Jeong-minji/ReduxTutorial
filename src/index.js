@@ -1,20 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import User from "./pages/User"
 
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import { Provider } from "react-redux";
-import rootReducer from "./store/reducers";
+import {Provider} from "react-redux";
+import configureStore from "./redux/store/configureStore";
 
-import User from "./User";
-import Count from "./Count";
-
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = configureStore();
 
 ReactDOM.render(
-  <Provider store={store}>
-    {/* <Count /> */}
-    <User />
-  </Provider>,
+    <Provider store={store}>
+      <User />
+    </Provider>,
   document.getElementById("root")
 );
+
