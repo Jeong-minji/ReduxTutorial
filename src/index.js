@@ -1,16 +1,32 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import User from "./pages/User"
+import { createStore } from "redux";
 
-import {Provider} from "react-redux";
-import configureStore from "./redux/store/configureStore";
+const add = document.getElementById("add");
+const minus = document.getElementById("minus");
+const number = document.querySelector("span");
 
-const store = configureStore();
+const countModifier = (count = 0, action) => {
+  switch (action.type) {
+    case "ADD":
+      return count + 1;
+    case "MINUS":
+      return count - 1;
+    default:
+      return count;
+  }
+};
 
-ReactDOM.render(
-    <Provider store={store}>
-      <User />
-    </Provider>,
-  document.getElementById("root")
-);
+const countStore = createStore(countModifier);
 
+const updateNumber = () => {
+  number.innerText = countStore.getState();
+};
+
+add.addEventListener("click", () => {
+  countStore.dispatch({ type: "ADD" });
+  updateNumber();
+});
+
+minus.addEventListener("click", () => {
+  countStore.dispatch({ type: "MINUS" });
+  updateNumber();
+});
